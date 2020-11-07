@@ -27,7 +27,7 @@ jobs:
     - name: Lint with black, isort and mypy
       run: |
         black --check .
-        isort isort --check-only .
+        isort --check-only .
         mypy .
     - name: Test with pytest
       run: |
