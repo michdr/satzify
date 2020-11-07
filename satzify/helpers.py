@@ -54,7 +54,8 @@ def get_pos_annotation(
     idx: int,
     next_idx: int,
 ) -> Union[Tuple[str, Any, str], str]:
-    if (pos := row.get("pos_")) in annotated_keys:
+    pos = row.get("pos_")
+    if pos in annotated_keys:
         return text[idx:next_idx], annotations_settings[pos]["name"], colors[pos]
     else:
         return text[idx:next_idx]
