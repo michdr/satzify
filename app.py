@@ -7,7 +7,8 @@ from satzify.helpers import (
     get_annotated_text,
     get_doc,
     get_tokens_df,
-    load_spacy_nlp_model, split_annotated_text
+    load_spacy_nlp_model,
+    split_annotated_text,
 )
 
 colors = dict()
@@ -52,12 +53,16 @@ colors.update(_colors)
 
 # Main part - outputs
 with st.beta_expander("Parts of speech annotations"):
-    list_annotated_text = split_annotated_text(get_annotated_text("POS", text, pos_annotated_names, colors))
+    list_annotated_text = split_annotated_text(
+        get_annotated_text("POS", text, pos_annotated_names, colors)
+    )
     for annotations in list_annotated_text:
         annotated_text(*annotations)
 
 with st.beta_expander("Cases and genders annotations"):
-    list_annotated_text = split_annotated_text(get_annotated_text("CASES", text, cases_annotated_names, colors))
+    list_annotated_text = split_annotated_text(
+        get_annotated_text("CASES", text, cases_annotated_names, colors)
+    )
     for annotations in list_annotated_text:
         annotated_text(*annotations)
 

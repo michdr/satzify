@@ -2,8 +2,12 @@ import pandas.api.types as ptypes
 import pytest
 
 from satzify import constants
-from satzify.helpers import (annotated_names_to_keys, get_annotated_text,
-                             get_tokens_df, split_annotated_text)
+from satzify.helpers import (
+    annotated_names_to_keys,
+    get_annotated_text,
+    get_tokens_df,
+    split_annotated_text,
+)
 
 
 @pytest.fixture
