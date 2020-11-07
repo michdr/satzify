@@ -1,0 +1,2 @@
+# satzify
+Simple sentences annotator
