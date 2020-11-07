@@ -16,7 +16,8 @@ def load_spacy_nlp_model() -> spacy.language.Language:
 
 
 def _doc_text(doc: Doc) -> str:
-    return doc.text  # a workaround to use st_cache for get_doc
+    # a workaround to use st_cache for get_doc
+    return doc.text  # type: ignore
 
 
 @st_cache(hash_funcs={Doc: _doc_text})
@@ -89,12 +90,12 @@ def get_cases_annotation(
 ANNOTATION_FUNCTIONS = dict(POS=get_pos_annotation, CASES=get_cases_annotation)
 
 
-def merge_same_annotation_texts(annotations: list):
+def merge_same_annotation_texts(annotations: list) -> list:
     groups = groupby(
-        annotations, key=lambda x: x[1] if isinstance(x, tuple) else count()
+        annotations, key=lambda x: x[1] if isinstance(x, tuple) else count()  # type: ignore
     )  # group only tuples, strings - never group
     merged_annotations_lists = [list(g) for k, g in groups]
-    merged_annotations = list()
+    merged_annotations: List[Union[str, Tuple]] = list()
     for mal in merged_annotations_lists:
         if not mal:
             continue
@@ -110,8 +111,8 @@ def merge_same_annotation_texts(annotations: list):
 def get_annotated_text(
     what_to_annotate: str, text: str, annotated_names: List[str], colors: Dict[str, str]
 ) -> list:
-    annotations_settings = constants.ANNOTATIONS.get(what_to_annotate)
-    annotation_function = ANNOTATION_FUNCTIONS.get(what_to_annotate)
+    annotations_settings = constants.ANNOTATIONS[what_to_annotate]
+    annotation_function = ANNOTATION_FUNCTIONS[what_to_annotate]
     annotations = list()
     tokens_df = get_tokens_df(text)
     n_rows = tokens_df.shape[0]
@@ -128,9 +129,9 @@ def get_annotated_text(
     return merge_same_annotation_texts(annotations)
 
 
-def split_annotated_text(annotated_text: str, delimiter: str = "\n") -> list:
+def split_annotated_text(annotated_text: list, delimiter: str = "\n") -> list:
     return [
         list(group)
-        for k, group in groupby(annotated_text, lambda x: x == delimiter)
+        for k, group in groupby(annotated_text, lambda x: x == delimiter)  # type: ignore
         if not k
     ]

@@ -25,7 +25,7 @@ sb_header_cols[1].title(constants.LANGUAGE)
 
 
 def display_sidebar_for_category(category: str, title: str):
-    category_settings = constants.ANNOTATIONS.get(category)
+    category_settings = constants.ANNOTATIONS[category]
     st.sidebar.title(title)
     sb_pos_cols = st.sidebar.beta_columns(2)
     for i, (k, v) in enumerate(category_settings.items()):
