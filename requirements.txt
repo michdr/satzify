@@ -1,5 +1,5 @@
 streamlit==0.76.0
 spacy-streamlit==1.0.0rc1
-st-annotated-text==1.0.1
+st-annotated-text==1.1.0
 pandas==1.1.4
 https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-3.0.0/de_core_news_sm-3.0.0.tar.gz
